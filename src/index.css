@@ -8,8 +8,17 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Modern CMS Color Palette */
+    --background: 248 250 252;
+    --foreground: 221 39% 11%;
+    
+    /* CMS Brand Colors */
+    --cms-primary: 213 94% 68%;
+    --cms-primary-dark: 213 94% 58%;
+    --cms-accent: 33 100% 68%;
+    --cms-success: 142 71% 45%;
+    --cms-warning: 33 100% 58%;
+    --cms-danger: 0 84% 60%;
 
     --card: 0 0% 100%;
     --card-foreground: 222.2 84% 4.9%;
@@ -17,11 +26,11 @@ All colors MUST be HSL.
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 213 94% 68%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 220 14% 96%;
+    --secondary-foreground: 221 39% 11%;
 
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;

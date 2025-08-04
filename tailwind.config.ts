@@ -24,6 +24,12 @@ export default {
 				ring: 'hsl(var(--ring))',
 				background: 'hsl(var(--background))',
 				foreground: 'hsl(var(--foreground))',
+				'cms-primary': 'hsl(var(--cms-primary))',
+				'cms-primary-dark': 'hsl(var(--cms-primary-dark))',
+				'cms-accent': 'hsl(var(--cms-accent))',
+				'cms-success': 'hsl(var(--cms-success))',
+				'cms-warning': 'hsl(var(--cms-warning))',
+				'cms-danger': 'hsl(var(--cms-danger))',
 				primary: {
 					DEFAULT: 'hsl(var(--primary))',
 					foreground: 'hsl(var(--primary-foreground))'
