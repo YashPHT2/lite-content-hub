@@ -8,60 +8,70 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* Modern CMS Color Palette */
-    --background: 248 250 252;
-    --foreground: 221 39% 11%;
+    /* Twitter/X Inspired Dark Theme */
+    --background: 0 0% 0%;
+    --foreground: 0 0% 98%;
     
-    /* CMS Brand Colors */
-    --cms-primary: 213 94% 68%;
-    --cms-primary-dark: 213 94% 58%;
-    --cms-accent: 33 100% 68%;
-    --cms-success: 142 71% 45%;
-    --cms-warning: 33 100% 58%;
-    --cms-danger: 0 84% 60%;
+    /* Glass Effects */
+    --glass-bg: 0 0% 5%;
+    --glass-border: 0 0% 15%;
+    --glass-hover: 0 0% 8%;
+    
+    /* Twitter Blue */
+    --twitter-blue: 203 89% 53%;
+    --twitter-blue-hover: 203 89% 43%;
+    --twitter-blue-light: 203 89% 63%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 0 0% 3%;
+    --card-foreground: 0 0% 98%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 3%;
+    --popover-foreground: 0 0% 98%;
 
-    --primary: 213 94% 68%;
-    --primary-foreground: 0 0% 100%;
+    --primary: 203 89% 53%;
+    --primary-foreground: 0 0% 98%;
 
-    --secondary: 220 14% 96%;
-    --secondary-foreground: 221 39% 11%;
+    --secondary: 0 0% 10%;
+    --secondary-foreground: 0 0% 98%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 0 0% 10%;
+    --muted-foreground: 0 0% 65%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 0 0% 10%;
+    --accent-foreground: 0 0% 98%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 0 0% 15%;
+    --input: 0 0% 15%;
+    --ring: 203 89% 53%;
 
-    --radius: 0.5rem;
+    --radius: 12px;
 
-    --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
+    /* Glassmorphism Variables */
+    --glass-blur: blur(20px);
+    --glass-opacity: 0.1;
+    --glass-border-opacity: 0.2;
+    
+    /* Sidebar */
+    --sidebar-background: 0 0% 2%;
+    --sidebar-foreground: 0 0% 95%;
+    --sidebar-primary: 203 89% 53%;
     --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 0 0% 8%;
+    --sidebar-accent-foreground: 0 0% 95%;
+    --sidebar-border: 0 0% 12%;
+    --sidebar-ring: 203 89% 53%;
+  }
 
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+  .light {
+    /* Light mode (if needed) */
+    --background: 0 0% 100%;
+    --foreground: 0 0% 2%;
+    --glass-bg: 0 0% 98%;
+    --glass-border: 0 0% 90%;
+    --glass-hover: 0 0% 95%;
   }
 
   .dark {
@@ -103,6 +113,45 @@ All colors MUST be HSL.
   }
 }
 
+@layer components {
+  /* Glassmorphism Effects */
+  .glass-card {
+    @apply backdrop-blur-xl bg-white/5 border border-white/10 shadow-2xl;
+  }
+  
+  .glass-sidebar {
+    @apply backdrop-blur-2xl bg-black/80 border-r border-white/10;
+  }
+  
+  .glass-header {
+    @apply backdrop-blur-xl bg-black/60 border-b border-white/10;
+  }
+  
+  .glass-button {
+    @apply backdrop-blur-md bg-white/10 hover:bg-white/20 border border-white/20 transition-all duration-300;
+  }
+  
+  .glass-input {
+    @apply backdrop-blur-md bg-white/5 border border-white/20 focus:border-primary/50 focus:bg-white/10;
+  }
+  
+  /* Twitter-style animations */
+  .twitter-hover {
+    @apply transform transition-all duration-200 hover:scale-105 hover:shadow-xl;
+  }
+  
+  .liquid-animation {
+    @apply relative overflow-hidden;
+  }
+  
+  .liquid-animation::before {
+    content: '';
+    @apply absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent;
+    animation: liquid-flow 3s infinite;
+    transform: translateX(-100%);
+  }
+}
+
 @layer base {
   * {
     @apply border-border;
@@ -110,5 +159,25 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+    background: radial-gradient(ellipse at top, rgba(29, 155, 240, 0.1) 0%, transparent 70%),
+                radial-gradient(ellipse at bottom, rgba(29, 155, 240, 0.05) 0%, transparent 70%),
+                hsl(var(--background));
+  }
+  
+  /* Scrollbar Styling */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    @apply bg-black/20;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    @apply bg-white/20 rounded-full;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-white/30;
   }
 }

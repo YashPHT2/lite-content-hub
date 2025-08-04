@@ -18,52 +18,64 @@ export const Dashboard = () => {
       title: 'Total Posts',
       value: totalPosts,
       icon: FileText,
-      color: 'text-cms-primary',
+      color: 'text-twitter-blue',
     },
     {
       title: 'Unique Tags',
       value: tagsCount,
       icon: TrendingUp,
-      color: 'text-cms-accent',
+      color: 'text-purple-400',
     },
     {
       title: 'Recent Activity',
       value: recentPosts.length,
       icon: Eye,
-      color: 'text-cms-success',
+      color: 'text-green-400',
     },
   ];
 
   return (
-    <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-3xl font-bold text-foreground">Dashboard</h1>
-          <p className="text-muted-foreground mt-1">
-            Welcome to your content management dashboard
+    <div className="space-y-6 relative">
+      {/* Floating background elements */}
+      <div className="fixed top-20 right-20 w-64 h-64 bg-twitter-blue/10 rounded-full blur-3xl animate-float opacity-30" />
+      <div className="fixed bottom-20 left-20 w-48 h-48 bg-purple-500/10 rounded-full blur-2xl animate-float opacity-40" style={{ animationDelay: '2s' }} />
+      
+      <div className="flex items-center justify-between relative z-10">
+        <div className="liquid-animation">
+          <h1 className="text-4xl font-bold bg-gradient-to-r from-white via-twitter-blue-light to-white bg-clip-text text-transparent">
+            Dashboard
+          </h1>
+          <p className="text-white/60 mt-2 flex items-center gap-2">
+            Welcome to your Twitter/X-style content hub
+            <span className="text-twitter-blue animate-pulse">⚡</span>
           </p>
         </div>
         <Button 
           onClick={() => navigate('/posts/new')}
-          className="bg-cms-primary hover:bg-cms-primary-dark"
+          variant="twitter"
+          size="lg"
+          className="animate-pulse-glow"
         >
-          <Plus className="w-4 h-4 mr-2" />
+          <Plus className="w-5 h-5 mr-2" />
           New Post
         </Button>
       </div>
 
       {/* Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {stats.map((stat) => (
-          <Card key={stat.title}>
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium text-muted-foreground">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 relative z-10">
+        {stats.map((stat, index) => (
+          <Card key={stat.title} className="glass-card twitter-hover group relative overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 relative z-10">
+              <CardTitle className="text-sm font-medium text-white/60 group-hover:text-white transition-colors">
                 {stat.title}
               </CardTitle>
-              <stat.icon className={`h-5 w-5 ${stat.color}`} />
+              <stat.icon className={`h-5 w-5 ${stat.color} group-hover:scale-110 transition-transform duration-300`} />
             </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold">{stat.value}</div>
+            <CardContent className="relative z-10">
+              <div className="text-3xl font-bold text-white group-hover:text-twitter-blue-light transition-colors">
+                {stat.value}
+              </div>
             </CardContent>
           </Card>
         ))}
@@ -71,34 +83,39 @@ export const Dashboard = () => {
 
       {/* Recent Posts */}
       {recentPosts.length > 0 && (
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center justify-between">
-              Recent Posts
+        <Card className="glass-card relative z-10 overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-r from-twitter-blue/5 via-transparent to-purple-500/5" />
+          <CardHeader className="relative z-10">
+            <CardTitle className="flex items-center justify-between text-white">
+              <span className="flex items-center gap-2">
+                Recent Posts
+                <span className="text-twitter-blue">🚀</span>
+              </span>
               <Button 
-                variant="outline" 
+                variant="glass" 
                 size="sm"
                 onClick={() => navigate('/posts')}
+                className="hover:bg-twitter-blue/20 hover:text-twitter-blue"
               >
                 View All
               </Button>
             </CardTitle>
           </CardHeader>
-          <CardContent>
+          <CardContent className="relative z-10">
             <div className="space-y-3">
               {recentPosts.map((post) => (
                 <div 
                   key={post.id}
-                  className="flex items-center justify-between p-3 border border-border rounded-lg hover:bg-secondary/50 transition-colors cursor-pointer"
+                  className="flex items-center justify-between p-4 border border-white/10 rounded-xl hover:bg-white/10 transition-all duration-300 cursor-pointer group backdrop-blur-sm twitter-hover"
                   onClick={() => navigate(`/posts/${post.id}`)}
                 >
                   <div className="flex-1">
-                    <h3 className="font-medium text-foreground">{post.title}</h3>
-                    <p className="text-sm text-muted-foreground line-clamp-1">
+                    <h3 className="font-semibold text-white group-hover:text-twitter-blue-light transition-colors">{post.title}</h3>
+                    <p className="text-sm text-white/60 line-clamp-1 group-hover:text-white/80 transition-colors">
                       {post.description}
                     </p>
                   </div>
-                  <div className="text-xs text-muted-foreground ml-4">
+                  <div className="text-xs text-white/50 ml-4 group-hover:text-white/70 transition-colors">
                     {new Date(post.createdAt).toLocaleDateString()}
                   </div>
                 </div>
@@ -110,21 +127,27 @@ export const Dashboard = () => {
 
       {/* Hero Section - Empty State */}
       {totalPosts === 0 && (
-        <Card className="relative overflow-hidden">
+        <Card className="glass-card relative overflow-hidden">
           <div 
-            className="absolute inset-0 bg-cover bg-center opacity-10"
+            className="absolute inset-0 bg-cover bg-center opacity-5"
             style={{ backgroundImage: `url(${heroImage})` }}
           />
-          <CardContent className="relative text-center py-16">
-            <FileText className="mx-auto h-16 w-16 text-cms-primary mb-6" />
-            <h3 className="text-2xl font-bold text-foreground mb-3">Welcome to Mini CMS</h3>
-            <p className="text-muted-foreground mb-8 max-w-md mx-auto">
-              Your lightweight content management system is ready. Start creating and managing your posts with our intuitive dashboard.
+          <div className="absolute inset-0 bg-gradient-to-br from-twitter-blue/10 via-transparent to-purple-500/10" />
+          <CardContent className="relative text-center py-16 z-10">
+            <div className="w-20 h-20 bg-twitter-blue/20 rounded-full flex items-center justify-center mx-auto mb-6 animate-float backdrop-blur-sm border border-twitter-blue/30">
+              <FileText className="h-10 w-10 text-twitter-blue" />
+            </div>
+            <h3 className="text-3xl font-bold text-white mb-4 bg-gradient-to-r from-white to-twitter-blue-light bg-clip-text text-transparent">
+              Welcome to Mini CMS X
+            </h3>
+            <p className="text-white/60 mb-8 max-w-lg mx-auto leading-relaxed">
+              Your Twitter/X-inspired content management system is ready. Create stunning posts with liquid glass effects and modern design.
             </p>
             <Button 
               onClick={() => navigate('/posts/new')}
+              variant="twitter"
               size="lg"
-              className="bg-cms-primary hover:bg-cms-primary-dark"
+              className="animate-pulse-glow"
             >
               <Plus className="w-5 h-5 mr-2" />
               Create Your First Post
