@@ -65,7 +65,7 @@ export const SearchPosts = () => {
       </div>
 
       {/* Search Interface */}
-      <div className="bg-white p-6 rounded-lg border border-border space-y-4">
+      <div className="glass-card p-6 space-y-4">
         <div className="flex flex-col sm:flex-row gap-4">
           <div className="flex-1">
             <div className="relative">
@@ -104,7 +104,7 @@ export const SearchPosts = () => {
                 setSearchTerm('');
                 setSelectedTag('all');
               }}
-              className="text-cms-primary hover:text-cms-primary-dark"
+              className="text-twitter-blue hover:text-twitter-blue-light"
             >
               Clear filters
             </button>
@@ -126,7 +126,7 @@ export const SearchPosts = () => {
           ))}
         </div>
       ) : (
-        <div className="text-center py-12 bg-white rounded-lg border border-border">
+        <div className="text-center py-12 glass-card">
           <Search className="mx-auto h-12 w-12 text-muted-foreground/50 mb-4" />
           <h3 className="text-lg font-medium text-foreground mb-2">No results found</h3>
           <p className="text-muted-foreground">

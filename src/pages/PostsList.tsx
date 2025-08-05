@@ -65,7 +65,7 @@ export const PostsList = () => {
         </div>
         <Button 
           onClick={() => navigate('/posts/new')}
-          className="bg-cms-primary hover:bg-cms-primary-dark"
+          variant="twitter"
         >
           <Plus className="w-4 h-4 mr-2" />
           New Post
@@ -73,7 +73,7 @@ export const PostsList = () => {
       </div>
 
       {/* Filters */}
-      <div className="flex flex-col sm:flex-row gap-4 bg-white p-4 rounded-lg border border-border">
+      <div className="flex flex-col sm:flex-row gap-4 glass-card p-4">
         <div className="flex-1">
           <div className="relative">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
@@ -142,7 +142,7 @@ export const PostsList = () => {
           ))}
         </div>
       ) : (
-        <div className="text-center py-12 bg-white rounded-lg border border-border">
+        <div className="text-center py-12 glass-card">
           <Search className="mx-auto h-12 w-12 text-muted-foreground/50 mb-4" />
           <h3 className="text-lg font-medium text-foreground mb-2">No posts found</h3>
           <p className="text-muted-foreground mb-6">
@@ -154,7 +154,7 @@ export const PostsList = () => {
           {!searchTerm && selectedTag === 'all' && (
             <Button 
               onClick={() => navigate('/posts/new')}
-              className="bg-cms-primary hover:bg-cms-primary-dark"
+              variant="twitter"
             >
               <Plus className="w-4 h-4 mr-2" />
               Create Post
