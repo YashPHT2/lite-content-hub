@@ -3,10 +3,10 @@ import { Save, X } from 'lucide-react';
 import { Post, PostFormData } from '@/types/post';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useToast } from '@/hooks/use-toast';
+import { RichTextEditor } from '@/components/editor/RichTextEditor';
 
 interface PostFormProps {
   post?: Post;
@@ -81,16 +81,16 @@ export const PostForm = ({ post, onSave, onCancel, isEdit = false }: PostFormPro
   };
 
   return (
-    <Card className="max-w-2xl mx-auto">
+    <Card className="max-w-2xl mx-auto glass-card">
       <CardHeader>
-        <CardTitle className="text-xl font-semibold">
+        <CardTitle className="text-xl font-semibold text-foreground">
           {isEdit ? 'Edit Post' : 'Create New Post'}
         </CardTitle>
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="space-y-2">
-            <Label htmlFor="title" className="text-sm font-medium">
+            <Label htmlFor="title" className="text-sm font-medium text-foreground">
               Title *
             </Label>
             <Input
@@ -98,31 +98,29 @@ export const PostForm = ({ post, onSave, onCancel, isEdit = false }: PostFormPro
               value={formData.title}
               onChange={(e) => handleChange('title', e.target.value)}
               placeholder="Enter post title..."
-              className={errors.title ? 'border-cms-danger' : ''}
+              className={errors.title ? 'border-red-500' : 'glass-input'}
             />
             {errors.title && (
-              <p className="text-sm text-cms-danger">{errors.title}</p>
+              <p className="text-sm text-red-500">{errors.title}</p>
             )}
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="description" className="text-sm font-medium">
-              Description *
+            <Label htmlFor="description" className="text-sm font-medium text-foreground">
+              Content *
             </Label>
-            <Textarea
-              id="description"
+            <RichTextEditor
               value={formData.description}
-              onChange={(e) => handleChange('description', e.target.value)}
-              placeholder="Enter post description..."
-              className={`min-h-32 resize-none ${errors.description ? 'border-cms-danger' : ''}`}
+              onChange={(value) => handleChange('description', value)}
+              placeholder="Write your post content here..."
             />
             {errors.description && (
-              <p className="text-sm text-cms-danger">{errors.description}</p>
+              <p className="text-sm text-red-500">{errors.description}</p>
             )}
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="tag" className="text-sm font-medium">
+            <Label htmlFor="tag" className="text-sm font-medium text-foreground">
               Tag / Category
             </Label>
             <Input
@@ -130,20 +128,22 @@ export const PostForm = ({ post, onSave, onCancel, isEdit = false }: PostFormPro
               value={formData.tag}
               onChange={(e) => handleChange('tag', e.target.value)}
               placeholder="Enter a tag or category (optional)..."
+              className="glass-input"
             />
           </div>
 
           <div className="flex gap-3 pt-4">
             <Button
               type="submit"
-              className="flex-1 bg-cms-primary hover:bg-cms-primary-dark"
+              variant="twitter"
+              className="flex-1"
             >
               <Save className="w-4 h-4 mr-2" />
               {isEdit ? 'Update Post' : 'Create Post'}
             </Button>
             <Button
               type="button"
-              variant="outline"
+              variant="glass"
               onClick={onCancel}
               className="flex-1"
             >

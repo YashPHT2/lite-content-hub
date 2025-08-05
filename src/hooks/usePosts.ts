@@ -51,11 +51,25 @@ export const usePosts = () => {
     return posts.find(post => post.id === id);
   };
 
+  const importPosts = (importedPosts: any[]) => {
+    const newPosts = importedPosts.map(post => ({
+      id: crypto.randomUUID(),
+      title: post.title,
+      description: post.description,
+      tag: post.tag,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+    }));
+    
+    setPosts(prev => [...prev, ...newPosts]);
+  };
+
   return {
     posts,
     createPost,
     updatePost,
     deletePost,
     getPostById,
+    importPosts,
   };
 };

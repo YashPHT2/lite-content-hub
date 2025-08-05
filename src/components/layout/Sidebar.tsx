@@ -3,16 +3,22 @@ import {
   Plus, 
   Search, 
   Settings,
-  BarChart3
+  BarChart3,
+  Home,
+  Image,
+  Download
 } from 'lucide-react';
 import { NavLink } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 
 const navigation = [
-  { name: 'Dashboard', href: '/', icon: BarChart3 },
+  { name: 'Dashboard', href: '/', icon: Home },
   { name: 'All Posts', href: '/posts', icon: FileText },
   { name: 'New Post', href: '/posts/new', icon: Plus },
   { name: 'Search', href: '/search', icon: Search },
+  { name: 'Analytics', href: '/analytics', icon: BarChart3 },
+  { name: 'Media', href: '/media', icon: Image },
+  { name: 'Import/Export', href: '/import-export', icon: Download },
   { name: 'Settings', href: '/settings', icon: Settings },
 ];
 
