@@ -24,6 +24,18 @@ export const PostCard = ({ post, onEdit, onDelete, onView }: PostCardProps) => {
     <Card className="glass-card hover:bg-white/10 transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-twitter-blue/20 group relative overflow-hidden twitter-hover">
       <div className="absolute inset-0 bg-gradient-to-br from-twitter-blue/10 via-transparent to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
       
+      {/* Featured Image */}
+      {post.image && (
+        <div className="relative">
+          <img
+            src={post.image}
+            alt={post.title}
+            className="w-full h-48 object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+        </div>
+      )}
+      
       <CardHeader className="pb-3 relative z-10">
         <div className="flex items-start justify-between">
           <CardTitle className="text-lg font-bold text-white line-clamp-2 group-hover:text-twitter-blue-light transition-colors">

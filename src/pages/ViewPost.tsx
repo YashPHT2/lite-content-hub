@@ -7,6 +7,7 @@ import { Badge } from '@/components/ui/badge';
 import { DeleteDialog } from '@/components/post/DeleteDialog';
 import { useState, useEffect } from 'react';
 import { useToast } from '@/hooks/use-toast';
+import MDEditor from '@uiw/react-md-editor';
 
 export const ViewPost = () => {
   const { id } = useParams<{ id: string }>();
@@ -84,6 +85,17 @@ export const ViewPost = () => {
         </div>
       </div>
 
+      {/* Featured Image */}
+      {post.image && (
+        <div className="mb-6">
+          <img
+            src={post.image}
+            alt={post.title}
+            className="w-full h-64 md:h-96 object-cover rounded-lg shadow-lg"
+          />
+        </div>
+      )}
+
       <Card>
         <CardHeader>
           <div className="flex items-start justify-between">
@@ -113,10 +125,17 @@ export const ViewPost = () => {
         </CardHeader>
         
         <CardContent>
-          <div className="prose max-w-none">
-            <p className="text-foreground leading-relaxed whitespace-pre-wrap">
-              {post.description}
-            </p>
+          <div 
+            className="prose prose-sm max-w-none text-foreground"
+            data-color-mode="dark"
+          >
+            <MDEditor.Markdown 
+              source={post.description}
+              style={{ 
+                backgroundColor: 'transparent',
+                color: 'hsl(var(--foreground))',
+              }}
+            />
           </div>
         </CardContent>
       </Card>

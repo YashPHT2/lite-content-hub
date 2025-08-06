@@ -21,6 +21,7 @@ export const RichTextEditor = ({ value, onChange, placeholder = "Start writing..
     const after = value.substring(cursorPosition);
     const newValue = before + imageMarkdown + after;
     onChange(newValue);
+    setShowMediaLibrary(false);
   };
 
   const insertLink = () => {
