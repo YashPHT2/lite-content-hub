@@ -11,6 +11,7 @@ import { useToast } from '@/hooks/use-toast';
 
 export const SearchPosts = () => {
   const { posts, deletePost } = usePosts();
+  console.log('SearchPosts - Current posts:', posts);
   const navigate = useNavigate();
   const { toast } = useToast();
   

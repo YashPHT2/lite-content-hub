@@ -9,9 +9,12 @@ export const usePosts = () => {
   // Load posts from localStorage on mount
   useEffect(() => {
     const savedPosts = localStorage.getItem(STORAGE_KEY);
+    console.log('Loading posts from localStorage:', savedPosts);
     if (savedPosts) {
       try {
-        setPosts(JSON.parse(savedPosts));
+        const parsedPosts = JSON.parse(savedPosts);
+        console.log('Parsed posts:', parsedPosts);
+        setPosts(parsedPosts);
       } catch (error) {
         console.error('Error loading posts from localStorage:', error);
       }
@@ -20,18 +23,28 @@ export const usePosts = () => {
 
   // Save posts to localStorage whenever posts change
   useEffect(() => {
+    console.log('Saving posts to localStorage:', posts);
     localStorage.setItem(STORAGE_KEY, JSON.stringify(posts));
   }, [posts]);
 
   const createPost = (formData: PostFormData) => {
+    console.log('Creating post with data:', formData);
     const newPost: Post = {
       id: crypto.randomUUID(),
-      ...formData,
+      title: formData.title,
+      description: formData.description,
+      tag: formData.tag,
+      image: formData.image,
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
     };
     
-    setPosts(prev => [newPost, ...prev]);
+    console.log('New post created:', newPost);
+    setPosts(prev => {
+      const updatedPosts = [newPost, ...prev];
+      console.log('Updated posts array:', updatedPosts);
+      return updatedPosts;
+    });
     return newPost;
   };
 
@@ -57,6 +70,7 @@ export const usePosts = () => {
       title: post.title,
       description: post.description,
       tag: post.tag,
+      image: post.image,
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
     }));

@@ -12,6 +12,7 @@ import { useToast } from '@/hooks/use-toast';
 
 export const PostsList = () => {
   const { posts, deletePost } = usePosts();
+  console.log('PostsList - Current posts:', posts);
   const navigate = useNavigate();
   const { toast } = useToast();
   
